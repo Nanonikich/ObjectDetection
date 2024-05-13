@@ -1,0 +1,35 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:ObjectDetection.Gui.ViewModels"
+             x:Class="ObjectDetection.Gui.Views.Controls.DetectionTableView"
+             x:DataType="vm:DetectionTableViewModel">
+    
+    <Grid RowDefinitions="1.3*, *">
+        <DataGrid Grid.Row="0"
+				  IsReadOnly="True"
+                  HorizontalScrollBarVisibility="Disabled"
+                  VerticalScrollBarVisibility="Auto"
+                  AutoGenerateColumns="False"
+				  ItemsSource="{Binding DetectionResults}"
+				  SelectionMode="Single"
+                  CanUserReorderColumns="True"
+                  CanUserResizeColumns="True"
+				  GridLinesVisibility="All"
+				  BorderThickness="1"
+				  BorderBrush="Gray">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Title"
+                                    MinWidth="60"
+                                    Width="3*"
+                                    Binding="{Binding Title}"/>
+                <DataGridTextColumn Header="Confidence"
+                                    MinWidth="35"
+                                    Width="2*"
+                                    Binding="{Binding Result}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+    
+</UserControl>

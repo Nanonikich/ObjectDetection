@@ -1,0 +1,40 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:ObjectDetection.Gui.ViewModels"
+             xmlns:views="using:ObjectDetection.Gui.Views.Controls"
+             x:Class="ObjectDetection.Gui.Views.Controls.VideoProcessingView"
+             x:DataType="vm:VideoProcessingViewModel">
+
+	<UserControl.Styles>
+		<Style Selector="Button">
+			<Setter Property="Margin" Value="2"/>
+		</Style>
+	</UserControl.Styles>
+	
+    <Grid RowDefinitions="11*, *">
+        <DockPanel Grid.Row="0" 
+                   LastChildFill="True"
+                   Background="Black">
+            <Image Source="{Binding Picture}" 
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Stretch"/>
+        </DockPanel>
+        
+        <DockPanel Grid.Row="1" Margin="0, 2, 0, 0">
+            <Button Content="Start"
+                    HorizontalAlignment="Left"
+                    IsEnabled="{Binding !IsRunningProcessing}"
+                    Command="{Binding StartCommand}"/>
+            <Button Content="Stop"
+                    HorizontalAlignment="Stretch"
+                    IsEnabled="{Binding IsRunningProcessing}"
+                    Command="{Binding StopCommand}"/>
+            <Button Content="Settings"
+                    HorizontalAlignment="Right"
+                    IsEnabled="{Binding !IsRunningProcessing}"
+                    Command="{Binding SettingsCommand}"/>
+        </DockPanel>
+    </Grid>
+</UserControl>

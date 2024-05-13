@@ -1,0 +1,33 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:ObjectDetection.Gui.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="using:ObjectDetection.Gui.Views.Controls"
+        mc:Ignorable="d" MinWidth="876" MinHeight="526"
+        x:Class="ObjectDetection.Gui.Views.Windows.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="avares://ObjectDetection.Gui.Common/Assets/avalonia-logo.ico"
+        WindowStartupLocation="CenterScreen"
+        Title="Object Detection">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4"/>
+            <ColumnDefinition Width="2*" MaxWidth="350"/>
+        </Grid.ColumnDefinitions>
+
+        <local:VideoProcessingView Grid.Column="0"
+                                   DataContext="{Binding VideoProcessingViewModel}"/>
+
+        <GridSplitter Grid.Column="1"
+                      Background="Gray"
+                      ResizeDirection="Columns"/>
+
+        <local:DetectionTableView Grid.Column="2"
+                                  DataContext="{Binding DetectionTableViewModel}"/>
+    </Grid>
+
+
+</Window>

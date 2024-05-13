@@ -1,0 +1,30 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style Selector="Button">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="MinHeight" Value="30"/>
+        <Setter Property="MinWidth" Value="80"/>
+        <Setter Property="Margin" Value="3, 5, 0, 5"/>
+        <Setter Property="Background" Value="#2d6ac4"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    </Style>
+
+    <Style Selector="SplitButton Button">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Margin" Value="-0.5"/>
+    </Style>
+
+    <Style Selector="SplitButton">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="MinHeight" Value="30"/>
+        <Setter Property="MinWidth" Value="80"/>
+        <Setter Property="Margin" Value="0.5 0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    </Style>
+
+
+</Styles>

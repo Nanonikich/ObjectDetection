@@ -1,0 +1,14 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <FluentTheme DensityStyle="Normal">
+        <FluentTheme.Palettes>
+            <ColorPaletteResources x:Key="Light"
+                                   Accent="#006A6E"
+                                   RegionColor="White" />
+            <ColorPaletteResources x:Key="Dark"
+                                   Accent="#006A6E"
+                                   RegionColor="#28292A"/>
+        </FluentTheme.Palettes>
+    </FluentTheme>
+</Styles>

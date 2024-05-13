@@ -1,0 +1,35 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:ObjectDetection.Gui.ViewModels"
+        xmlns:components="using:ObjectDetection.Gui.Common.Views.Controls.Components"
+        x:Class="ObjectDetection.Gui.Views.Windows.FFmpegImageSourceSettingWindow"
+        x:DataType="vm:FFmpegImageSourceSettingWindowViewModel"
+        mc:Ignorable="d" Width="500" Height="100"
+        Icon="avares://ObjectDetection.Gui.Common/Assets/avalonia-logo.ico"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False"
+        Title="Settings">
+    
+    <Grid RowDefinitions="40, 45">
+        <DockPanel Margin="5, 8, 8, 5" Grid.Row="0">
+            <Label Content="URI:"
+                   VerticalAlignment="Center"/>
+            <Button Content="..."
+                    VerticalAlignment="Center"
+                    DockPanel.Dock="Right"
+                    Command="{Binding SelectVideoFileCommand}"/>
+            <TextBox Text="{Binding UriVideoStream, Mode=TwoWay}"
+                     Height="10"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Stretch"
+                     DragDrop.AllowDrop="True"/>
+        </DockPanel>
+        
+        <components:BaseButtonsView Grid.Row="1"
+                                    ApplyCommand="{Binding ApplyCommand}"
+                                    CancelCommand="{Binding CancelCommand}"/>
+    </Grid>
+
+</Window>
