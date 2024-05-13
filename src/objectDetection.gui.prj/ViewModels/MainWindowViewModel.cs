@@ -33,7 +33,7 @@ public class MainWindowViewModel : ViewModelBase, IActivatableViewModel
 
 	/// <summary>Создаёт экземпляр класса <see cref="MainWindowViewModel"/>.</summary>
 	public MainWindowViewModel()
-    {
+	{
 		Activator = new();
 		this.WhenActivated((disposables) =>
 		{

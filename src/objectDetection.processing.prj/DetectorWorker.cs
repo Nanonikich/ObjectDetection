@@ -13,15 +13,27 @@ using ObjectDetection.Gui.Helpers;
 namespace ObjectDetection.Processing;
 
 /// <summary>Детектор объектов.</summary>
-public class DetectorWorker
+public class DetectorWorker : IDisposable
 {
 	const float MinConfidence = 0.7f;
+
+	private readonly InferenceSession _inferenceSession;
+	private readonly RunOptions _runOptions;
+
+	/// <summary>Создаёт экземпляр класса <see cref="DetectorWorker"/>.</summary>
+	/// <param name="inferenceSession">Сеанс вывода результатов сети.</param>
+	/// <param name="runOptions">Настройки вывода результатов сети.</param>
+	public DetectorWorker(InferenceSession inferenceSession, RunOptions runOptions)
+	{
+		_inferenceSession = inferenceSession;
+		_runOptions = runOptions;
+	}
 
 	/// <summary>Обработка кадра.</summary>
 	/// <param name="onnxPath">Путь к модели onnx.</param>
 	/// <param name="original">Исходное изображение.</param>
 	/// <returns>Результаты обработки.</returns>
-	public VideoProcessingResults FrameProcessing(string onnxPath, byte[]? original)
+	public VideoProcessingResults FrameProcessing(byte[]? original)
 	{
 		var image = Image.Load<Rgb24>(original);
 
@@ -58,9 +70,7 @@ public class DetectorWorker
 		};
 
 		// вывод
-		using var session = new InferenceSession(onnxPath);
-		using var runOptions = new RunOptions();
-		using IDisposableReadOnlyCollection<OrtValue> results = session.Run(runOptions, inputs, session.OutputNames);
+		using IDisposableReadOnlyCollection<OrtValue> results = _inferenceSession.Run(_runOptions, inputs, _inferenceSession.OutputNames);
 
 		// постобработка и получение предсказаний
 		var resultsArray = results.ToArray();
@@ -117,5 +127,12 @@ public class DetectorWorker
 		}
 
 		return new VideoProcessingResults(image, newDetectionResults);
+	}
+
+	/// <inheritdoc/>
+	public void Dispose()
+	{
+		_inferenceSession?.Dispose();
+		_runOptions?.Dispose();
 	}
 }

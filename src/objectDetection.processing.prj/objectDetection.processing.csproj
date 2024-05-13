@@ -9,9 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Emgu.CV" />
-    <PackageReference Include="Emgu.CV.Bitmap" />
-    <PackageReference Include="Emgu.CV.runtime.windows" />
+    <PackageReference Include="MediaFileProcessor" />
     <PackageReference Include="Microsoft.ML.OnnxRuntime" />
     <PackageReference Include="SixLabors.ImageSharp" />
     <PackageReference Include="SixLabors.ImageSharp.Drawing" />

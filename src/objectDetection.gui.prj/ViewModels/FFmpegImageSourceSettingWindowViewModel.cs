@@ -27,6 +27,7 @@ public class FFmpegImageSourceSettingWindowViewModel : ViewModelBase
 		set => this.RaiseAndSetIfChanged(ref _uriVideoStream, value);
 	}
 
+	/// <summary>Взаимодействие с диалоговыми окнами.</summary>
 	public DialogServiceInteractions DialogServiceInteractions { get; init; } = new();
 
 	#region Commands

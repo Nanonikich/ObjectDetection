@@ -12,7 +12,6 @@ using Avalonia.Media.Imaging;
 
 using ReactiveUI;
 
-using ObjectDetection.Configuration;
 using ObjectDetection.Gui.Common.Helpers;
 using ObjectDetection.Gui.Common.Services.Dialogs;
 using ObjectDetection.Gui.Common.ViewModels;
@@ -28,7 +27,6 @@ public class VideoProcessingViewModel : ViewModelBase, IActivatableViewModel
 {
 	#region Fields
 
-	private readonly Networks _networks;
 	private readonly DetectorWorker _detectorWorker;
 	private readonly VideoFrameExtractor _videoFrameExtractor;
 	private readonly ProcessingParameters _processingParameters;
@@ -92,13 +90,11 @@ public class VideoProcessingViewModel : ViewModelBase, IActivatableViewModel
 	#region .ctor
 
 	/// <summary>Создаёт экземпляр класса <see cref="VideoProcessingViewModel"/>.</summary>
-	/// <param name="config">Конфигурация приложения.</param>
 	/// <param name="processingParameters">Параметры обработки.</param>
 	/// <param name="detectorWorker">Детектор.</param>
 	/// <param name="videoFrameExtractor">Сегментатор видео на кадры.</param>
 	/// <param name="imageConverter">Конвертер изображений.</param>
 	public VideoProcessingViewModel(
-		ApplicationConfiguration config, 
 		ProcessingParameters processingParameters,
 		DetectorWorker detectorWorker, 
 		VideoFrameExtractor videoFrameExtractor,
@@ -111,11 +107,11 @@ public class VideoProcessingViewModel : ViewModelBase, IActivatableViewModel
 				.Create(() =>
 				{
 					StopPlayer();
+					_detectorWorker.Dispose();
 				})
 				.DisposeWith(disposables);
 		});
 
-		_networks = config.Networks;
 		_detectorWorker = detectorWorker;
 		_videoFrameExtractor = videoFrameExtractor;
 		_imageConverter = imageConverter;
@@ -141,9 +137,9 @@ public class VideoProcessingViewModel : ViewModelBase, IActivatableViewModel
 
 			_videoFrameExtractor.FrameCaptureEvent += OnFrameProcessing;
 			_tokenSource = new();
-			new Task(() =>
+			new Task(async () =>
 			{
-				_videoFrameExtractor.InitializeFrameExtractor(_processingParameters.Url, _tokenSource.Token);
+				await _videoFrameExtractor.FrameExtractorProcessing(_processingParameters.Url, _tokenSource.Token);
 			}, _tokenSource.Token).Start();
 		}
 		else
@@ -161,8 +157,6 @@ public class VideoProcessingViewModel : ViewModelBase, IActivatableViewModel
 	{
 		_tokenSource.Cancel();
 		
-		_videoFrameExtractor.Dispose();
-
 		_picture?.Dispose();
 		Picture = null;
 
@@ -184,7 +178,7 @@ public class VideoProcessingViewModel : ViewModelBase, IActivatableViewModel
 
 	private void OnFrameProcessing(object? sender, byte[] e)
 	{
-		var processingResults = _detectorWorker.FrameProcessing(_networks.Detector.DetectorPath, e);
+		var processingResults = _detectorWorker.FrameProcessing(e);
 
 		if(!_tokenSource.Token.IsCancellationRequested)
 		{

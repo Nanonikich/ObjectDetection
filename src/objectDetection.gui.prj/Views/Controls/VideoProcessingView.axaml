@@ -7,12 +7,12 @@
              x:Class="ObjectDetection.Gui.Views.Controls.VideoProcessingView"
              x:DataType="vm:VideoProcessingViewModel">
 
-	<UserControl.Styles>
-		<Style Selector="Button">
-			<Setter Property="Margin" Value="2"/>
-		</Style>
-	</UserControl.Styles>
-	
+    <UserControl.Styles>
+        <Style Selector="Button">
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+    </UserControl.Styles>
+    
     <Grid RowDefinitions="11*, *">
         <DockPanel Grid.Row="0" 
                    LastChildFill="True"

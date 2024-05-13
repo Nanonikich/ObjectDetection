@@ -31,9 +31,9 @@ public class FileDialogInteractionSource
 				{
 					Patterns = new List<string> { "*.mp4", "*.avi", "*.ts", "*.mkv", "*.mov", "*.wmv", "*.m4v" },
 				},
-				new("Image Files ( *.png *.jpg *.bmp *.gif )")
+				new("Image Files ( *.png *.jpg *.bmp )")
 				{
-					Patterns = new List<string> { "*.png", "*.jpg", "*.bmp", "*.gif" },
+					Patterns = new List<string> { "*.png", "*.jpg", "*.bmp" },
 				},
 				new("All Files")
 				{

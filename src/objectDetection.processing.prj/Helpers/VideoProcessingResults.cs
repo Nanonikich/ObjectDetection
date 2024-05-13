@@ -14,13 +14,13 @@ public record VideoProcessingResults : IDisposable
 	/// <summary>Результаты детекций.</summary>
 	public List<ObjectInfo> DetectionResults { get; }
 
-    public VideoProcessingResults(Image<Rgb24>? imageRes, List<ObjectInfo> detectionResults)
-    {
+	public VideoProcessingResults(Image<Rgb24>? imageRes, List<ObjectInfo> detectionResults)
+	{
 		Picture = imageRes;
 		DetectionResults = detectionResults;
 	}
 
-    public void Dispose()
+	public void Dispose()
 	{
 		Picture?.Dispose();
 		Picture = null;

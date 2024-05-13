@@ -7,6 +7,7 @@ using Avalonia;
 
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.ML.OnnxRuntime;
 
 using ReactiveUI;
 
@@ -40,7 +41,12 @@ public partial class App : Application
 			{
 				service.UseMicrosoftDependencyResolver();
 				service
-					.AddSingleton(provider => new ProcessConfiguration().Load())
+					.AddSingleton(provider => 
+					{
+						var configuration = new ProcessConfiguration().Load();
+						return new InferenceSession(configuration.Networks.Detector.DetectorPath);
+					})
+					.AddSingleton<RunOptions>()
 					.AddSingleton<DetectorWorker>()
 					.AddSingleton<VideoFrameExtractor>()
 					.AddSingleton<IImageConverter, ImageConverter>()

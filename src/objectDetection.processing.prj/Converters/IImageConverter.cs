@@ -1,6 +1,6 @@
 ﻿namespace ObjectDetection.Processing.Converters;
 
-/// <summary>Ковертер изображений.</summary>
+/// <summary>Конвертер изображений.</summary>
 public interface IImageConverter
 {
 	/// <summary>Конвертация изображения в байты.</summary>
